@@ -1,0 +1,51 @@
+body{
+	background: center / contain no-repeat url("background4.jpg");
+	background-size: cover;
+	font-family: "Gill Sans", sans-serif;
+	margin-bottom: 20px;
+}
+
+h1{
+	margin-left: 200px;
+	font-size: 50px;
+	font-family: "Gill Sans", sans-serif;
+}
+
+input{
+	margin-left: 1400px;
+}
+
+button{
+	margin-left: 1400px;
+}
+
+textarea{
+	margin-left: 1400px;
+}
+
+.texto{
+	margin-left: 1400px;
+}
+
+.genero{
+	margin-right: 1200px;
+	margin-left: 350px;
+}
+
+.estiloImagenPokemonMale{
+	height: 300px;
+	width: 300px;
+	margin-right: 700px;
+	margin-left: 100px;
+}
+
+.estiloImagenPokemonFemale{
+	height: 300px;
+	width: 300px;
+	margin-right: 500px;
+	margin-left: -700px;
+}
+
+.imagenes{
+	flex-direction: row;
+}

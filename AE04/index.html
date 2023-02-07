@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+			<title>Pokédex</title>
+			<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+			<link rel="stylesheet" href="estilos.css">
+			<script>
+				function getPokemonInfo() {
+			      var strNombrePokemon = document.getElementById("strNombrePokemon").value;
+			      axios
+			      .get("https://pokeapi.co/api/v2/pokemon/" + strNombrePokemon.toLowerCase())
+			      .then((response) => {
+			          
+			          console.log(response.data);
+						
+						var id;
+				        var strTipo1 = "";
+				        var strTipo2 = "--";
+				        var colorTipo1 = "";
+				        var colorTipo2 = "";
+				        var strEstadisticas = "";
+				        var strHabilidad1 = "";
+				        var strHabilidad2 = "--";
+				        
+
+
+
+				        const styleColoresTipos = {
+				          acero: '#a3a4a7',
+				          agua: '#39b3e8',
+				          bicho: '#a3f12b',
+				          dragon: '#3d0373',
+				          electrico: '#f3ed27',
+				          fantasma: '#48518c',
+				          fuego: '#e73800',
+				          hada: '#f48cdb',
+				          hielo: '#a4ecf3',
+				          lucha: '#e5651c',
+				          normal: '#e1c9bb',
+				          planta: '#2a8001',
+				          psiquico: '#ee60e3',
+				          roca: '#af854a',
+				          siniestro: '#5d3805',
+				          tierra: '#88632f',
+				          veneno: '#8f12e0',
+				          volador: '#76a2a7'
+				        };
+
+			          
+			          
+				        id = response.data.id;
+				          
+				        document.getElementById("imagenPokemonMale").src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" + id + ".png";
+				        document.getElementById("imagenPokemonFemale").src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/female/" + id + ".png";
+				        if(response.data.sprites.other.home.front_female == null){
+				        	document.getElementById("imagenPokemonFemale").src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" + id + ".png";
+				        }
+
+				          
+				        strTipo1 = response.data.types[0].type.name;
+				        document.getElementById("strTipo1").value = strTipo1;
+				        document.getElementById("strTipo2").value = strTipo2;
+				        if(response.data.types.length > 1){
+				        	strTipo2 = response.data.types[1].type.name;
+				        	document.getElementById("strTipo2").value = strTipo2;
+				        }
+
+				        for (var i = 0; i < response.data.stats.length; i++) {
+				          strEstadisticas += (response.data.stats[i].stat.name).toUpperCase() + ": " + response.data.stats[i].base_stat + "\n";
+				        }
+				        document.getElementById("strEstadisticas").value = strEstadisticas;
+
+				        strHabilidad1 = response.data.abilities[0].ability.name;
+				        document.getElementById("strHabilidad1").value = strHabilidad1;
+				        document.getElementById("strHabilidad2").value = strHabilidad2;
+				        if(response.data.abilities.length > 1){
+				        	strHabilidad2 = response.data.abilities[1].ability.name;
+				        	document.getElementById("strHabilidad2").value = strHabilidad2;
+				        }
+
+
+				        if (strTipo1 == "steel") {
+				        	colorTipo1 = styleColoresTipos.acero
+
+				        } else if (strTipo1 == "water") {
+				            colorTipo1 = styleColoresTipos.agua
+
+				        } else if (strTipo1 == "bug") {
+				            colorTipo1 = styleColoresTipos.bicho
+
+				        } else if (strTipo1 == "dragon") {
+				            colorTipo1 = styleColoresTipos.dragon
+
+				        } else if (strTipo1 == "electric") {
+				            colorTipo1 = styleColoresTipos.electrico
+
+				        } else if (strTipo1 == "ghost") {
+				            colorTipo1 = styleColoresTipos.fantasma
+
+				        } else if (strTipo1 == "fire") {
+				            colorTipo1 = styleColoresTipos.fuego
+
+				        } else if (strTipo1 == "fairy") {
+				            colorTipo1 = styleColoresTipos.hada
+
+				        } else if (strTipo1 == "ice") {
+				            colorTipo1 = styleColoresTipos.hielo
+
+				        } else if (strTipo1 == "fight") {
+				            colorTipo1 = styleColoresTipos.lucha
+
+				        } else if (strTipo1 == "normal") {
+				            colorTipo1 = styleColoresTipos.normal
+
+				        } else if (strTipo1 == "grass") {
+				            colorTipo1 = styleColoresTipos.planta
+
+				        } else if (strTipo1 == "psychic") {
+				            colorTipo1 = styleColoresTipos.psiquico
+
+				        } else if (strTipo1 == "rock") {
+				            colorTipo1 = styleColoresTipos.roca
+
+				        } else if (strTipo1 == "dark") {
+				            colorTipo1 = styleColoresTipos.siniestro
+
+				        } else if (strTipo1 == "ground") {
+				            colorTipo1 = styleColoresTipos.tierra
+
+				        } else if (strTipo1 == "poison") {
+				            colorTipo1 = styleColoresTipos.veneno
+
+				        } else if (strTipo1 == "flying") {
+				            colorTipo1 = styleColoresTipos.volador
+				            
+				        }
+
+
+				        if (strTipo2 == "steel") {
+				            colorTipo2 = styleColoresTipos.acero
+
+				        } else if (strTipo2 == "water") {
+				            colorTipo2 = styleColoresTipos.agua
+
+				        } else if (strTipo2 == "bug") {
+				            colorTipo2 = styleColoresTipos.bicho
+
+				        } else if (strTipo2 == "dragon") {
+				            colorTipo2 = styleColoresTipos.dragon
+
+				        } else if (strTipo2 == "electric") {
+				            colorTipo2 = styleColoresTipos.electrico
+
+				        } else if (strTipo2 == "ghost") {
+				            colorTipo2 = styleColoresTipos.fantasma
+
+				        } else if (strTipo2 == "fire") {
+				            colorTipo2 = styleColoresTipos.fuego
+
+				        } else if (strTipo2 == "fairy") {
+				            colorTipo2 = styleColoresTipos.hada
+
+				        } else if (strTipo2 == "ice") {
+				            colorTipo2 = styleColoresTipos.hielo
+
+				        } else if (strTipo2 == "fight") {
+				            colorTipo2 = styleColoresTipos.lucha
+
+				        } else if (strTipo2 == "normal") {
+				            colorTipo2 = styleColoresTipos.normal
+
+				        } else if (strTipo2 == "grass") {
+				            colorTipo2 = styleColoresTipos.planta
+
+				        } else if (strTipo2 == "psychic") {
+				            colorTipo2 = styleColoresTipos.psiquico
+
+				        } else if (strTipo2 == "rock") {
+				            colorTipo2 = styleColoresTipos.roca
+
+				        } else if (strTipo2 == "dark") {
+				            colorTipo2 = styleColoresTipos.siniestro
+
+				        } else if (strTipo2 == "ground") {
+				            colorTipo2 = styleColoresTipos.tierra
+
+				        } else if (strTipo2 == "poison") {
+				            colorTipo2 = styleColoresTipos.veneno
+
+				        } else if (strTipo2 == "flying") {
+				            colorTipo2 = styleColoresTipos.volador
+				            
+				        }
+
+				         document.getElementById("strTipo1").style.backgroundColor = colorTipo1;
+				         document.getElementById("strTipo2").style.backgroundColor = colorTipo2;
+
+
+			        })
+			        .catch((error) => {
+			          console.error(error);
+			        });
+			    }
+			</script>
+			<script src ="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+			<script type="text/javascript">
+				function guardarInfo() {
+			      var nombre = document.getElementById("strNombrePokemon").value;
+			      var strTipo1 = document.getElementById("strTipo1").value;
+			      var strTipo2 = document.getElementById("strTipo2").value;
+			      var strEstadisticas = document.getElementById("strEstadisticas").value;
+			      var strHabilidad1 = document.getElementById("strHabilidad1").value;
+			      var strHabilidad2 = document.getElementById("strHabilidad2").value;
+			      var imagenPokemonMale = document.getElementById("imagenPokemonMale").src;
+			      var imagenPokemonFemale = document.getElementById("imagenPokemonFemale").src;
+
+			      console.log(nombre);
+			      console.log(strTipo1);
+			      console.log(strTipo2);
+			      console.log(strEstadisticas);
+			      console.log(strHabilidad1);
+			      console.log(strHabilidad2);
+			      console.log(imagenPokemonMale);
+			      console.log(imagenPokemonFemale);
+
+			      $.ajax({
+			        type: "POST",
+			        url: "documentoPHP.php",
+			        data: {
+			          nombre: nombre,
+			          strTipo1: strTipo1,
+			          strTipo2: strTipo2,
+			          strEstadisticas: strEstadisticas,
+			          strHabilidad1: strHabilidad1,
+			          strHabilidad2: strHabilidad2,
+			          imagenPokemonMale: imagenPokemonMale,
+			          imagenPokemonFemale: imagenPokemonFemale
+			        },
+			        success: function (response) {
+			          alert(response);
+			        },
+			        error: function () {
+			          alert("Error");
+			        },
+			      });
+			      
+			    }
+			</script>
+		</head>
+		<body>
+			<h1>POKÉDEX</h1>
+			<p class="texto">Nombre del pokémon: </p>
+			<p><input type="text" value="" id="strNombrePokemon" class="inputNombrePokemon">
+			<button id="botonBusquedaPokemon" onclick="getPokemonInfo()">Buscar</button>
+			</p>
+
+			
+
+			<p class="texto">Tipo: </p>
+			<textarea id="strTipo1" rows="1"></textarea>
+			<textarea id="strTipo2" rows="1"></textarea>
+
+			<p class="texto">Estad&iacutesticas base: </p>
+			<textarea id="strEstadisticas" rows="7"></textarea>
+
+			<p class="texto">Habilidades: </p>
+			<textarea id="strHabilidad1" rows="1" cols="50"></textarea>
+			<textarea id="strHabilidad2" rows="1" cols="50"></textarea>
+
+			<p><button id="botonGuardar" onclick="guardarInfo()">Guardar</button></p>
+
+			
+			<p class="genero"> Macho / Hembra</p>
+			<img id="imagenPokemonMale" class="estiloImagenPokemonMale" />
+			<img id="imagenPokemonFemale" class="estiloImagenPokemonFemale" />
+			
+
+
+		</body>
+	</html>
